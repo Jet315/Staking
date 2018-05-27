@@ -1,0 +1,72 @@
+# Messages for the plugin - Use %PLUGINPREFIX% in any message to get the plugins prefix from the configuration file
+
+#No permission to command message
+NoPermission: "%PLUGINPREFIX%&cYou do not have permission for this!"
+InvalidSyntax: "%PLUGINPREFIX%&cUsage: &6/Stake &a<Player> &eor &6/Stats &a<Player>"
+
+#Invalid target - The message shown if the target player is invalid
+InvalidTarget: "%PLUGINPREFIX%&6Player &c%PLAYER% &6cannot be found!"
+#The message shown if the target player is already in a duel - %PlAYER% can be used in order to get the target player
+TargetPlayerIsInDuel: "%PLUGINPREFIX%&c%PLAYER% &6is currently in a duel!"
+#The message shown if the user performing the command is in a duel
+PlayerInDuel: "%PLUGINPREFIX%&6Finish your current duel before starting another one!"
+#Duel Expired (This message is shown if the opponent does not accept the players duel)- use %PLAYER% to get opponents name
+DuelExpired: "%PLUGINPREFIX%&6Your duel request against %PLAYER% has now expired!"
+#Duel is in cooldown - This message is sent to the player if player is in cooldown
+DuelCooldown: "%PLUGINPREFIX%&cPlease wait before sending another duel request!"
+#The message sent to the target player for a duel - use %PLAYER% to get the player sending the duel request
+DuelRequest: "%PLUGINPREFIX%&cPlayer &a%PLAYER% &chas challenged you to a duel! &a[CLICK]"
+#The message sent to the player for a duel - use %PLAYER% to get the target players name
+DuelSent: "%PLUGINPREFIX%&6You have sent &c%PLAYER%&6 a duel!"
+#The message sent if the player sends a duel to him/her self
+DuelSentToSelf: "%PLUGINPREFIX%&cYou cannot stake yourself!"
+#If the user adds more money to a duel but does not have enough this message is shown
+NotEnoughFunds: "%PLUGINPREFIX%&cYou do not have enough funds to stake this much!"
+#The message sent when a user closes the Kit Inventory without choosing a kit
+NoKitSelected: "%PLUGINPREFIX%&cYou must choose a kit!"
+#Title messages that are sent during countdown
+TitleMatchCountDown:
+#  timeInSeconds:<title|subtitle>
+  - "10:&cMatch Starting in..|&610"
+  - "5:&cMatch Starting in..|&65"
+  - "3:&cMatch Starting in..|&63"
+  - "2:&cMatch Starting in..|&62"
+  - "1:&cMatch Starting in..|&61"
+  - "0:&cFIGHT|&6Goodluck!"
+
+#Messages that are sent during countdown
+MessageMatchCountDown:
+#  timeInSeconds:message
+  - "10:%PLUGINPREFIX%&cMatch Starting in &610"
+  - "5:%PLUGINPREFIX%&cMatch Starting in &65"
+  - "3:%PLUGINPREFIX%&cMatch Starting in &63"
+  - "2:%PLUGINPREFIX%&cMatch Starting in &62"
+  - "1:%PLUGINPREFIX%&cMatch Starting in &61"
+  - "0:%PLUGINPREFIX%&cFIGHT &6Goodluck!"
+
+#The message sent to the person who won the duel
+WinnerMessage: "%PLUGINPREFIX%&aCongratulations! You won the duel!"
+#The message that is sent to the person who won, due to the opponent disconecting
+WinnerMessageDueToOpponentDisconnect: "%PLUGINPREFIX%&aCongratulations! You won due to your opponent quiting!"
+
+#The message sent to the person who list the duel
+LooserMessage: "%PLUGINPREFIX%&cUnlucky, You lost the duel"
+#After a while (such as if the users AFK within the arena) the match will expire. This is the message shown if the match timer reaches 0
+MatchEndDueToTime: "%PLUGINPREFIX%&6The match has now ended! &cKill the opponent quicker next time!"
+
+NoArenaFound: "%PLUGINPREFIX%&6No arenas are currently available"
+#The message shown when the a user has been force removed from a duel or trade (On server reboot, or plugin reload for example)
+ForceKickOutOfDuel: "%PLUGINPREFIX%&cThe plugin has been reloaded &6(Items have been refunded)"
+
+#Stats messages
+#If the stats option is not enabled, this is the message that is sent
+StatsNotEnabled: "%PLUGINPREFIX%&cStats has not been enabled!"
+#Message of the players stats - Replace %WR% for the win/loose ratio, %WINS% for the total wins, and %LOOSES% for the looses
+PlayersStats: "%PLUGINPREFIX%&6You have won &a%WINS%&6 games and lost &c%LOOSES%&6. Your win/loose ration is &e%WR%"
+#Similar to the above, however for a specified player, %TARGETPLAYER% can be used to get the target players name
+TargetPlayerStats: "%PLUGINPREFIX%&6%TARGETPLAYER% has won &a%WINS%&6 games and lost &c%LOOSES%&6. Your win/loose ratio is &e%WR%"
+#If the target player is invalid, this message is shown
+TargetPlayerNotFound: "%PLUGINPREFIX%&c%TARGETPLAYER% is not online"
+
+#If an error occurs while processing a command, the following message is sent
+ErrorOccurred: "%PLUGINPREFIX%&cAn error has occurred while processing your last request, please try again soon"

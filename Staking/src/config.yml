@@ -1,0 +1,41 @@
+#############################################
+#                                           #
+#                   Staking                 #
+#              Created by Jet315            #
+#                                           #
+#############################################
+
+#The prefix used for messages
+PluginsPrefix: "&7[&eStaking&7] "
+
+
+#The time needed to wait before sending another duel request, this prevents players from spamming duel requests (Measured as Seconds, must be integer)
+TimeForDuelRequestToExpire: 15
+
+## Inventory Options ##
+#When both players have accepted, a timer will tick down. Set the number of seconds you wish this timer to play for
+ConfirmTime: 3
+
+## Stats Options ##
+#The plugin automatically uses SQLite in order to store data
+#Editing any Stats Options will require a reboot in order to take effect
+SaveStatInformation: true
+SQLiteTableName: "stats"
+EnableQuickStatsCommand: true #Whether /stats can be used rather than /stake stats
+
+## PvP Options ##
+#If McMMO is enabled, Do you want to disable McMMO abilities during dueling?
+DisableMcMMOAbilitiesDuringDuels: true
+#This is the time allowed for each player to choose their kit (in seconds)
+MatchCountDownTime: 15
+#This is the duration (in seconds) that the match will last
+MatchTime: 300
+
+#Where would you like to teleport the players when the battle is over?
+#Either enter in a world name (and they will be teleported to the worlds spawn) or type 'LastLocation' for their last location
+#NOTE: If an invalid world is entered, last location will be used
+WhereToTeleportAfterDuel: "LastLocation"
+
+
+
+

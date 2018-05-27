@@ -1,0 +1,38 @@
+#Up to 54 kits can be created
+#Kits are selected by the player just before the duel starts
+#If only one kit is present in this file, that kit will be automatically wielded by the player - Else the player will select a kit via a GUI
+#specifiy slot in here
+#When a material is specified, first define the material type, then the amount, then the display name (use _ for spaces), then the lore (use _ for spaces and \n for new line) then the enchants
+#Enchants must be one from here: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/enchantments/Enchantment.html
+#Example:
+# "DIAMOND_SWORD:0 1 displayname:&7Fighter_&7Sword lore:&7Trusty_Sword|&7New_line! DAMAGE_ALL:5 "
+KitsGUI:
+  DisplayName: "&7Kits"
+  Size: 9 #Must be a multiple of 9, 54 is max
+Kits:
+  Fighter: #This can be called anything really..
+    DisplayIcon:
+      DisplayMaterial: "DIAMOND_SWORD:0 1 displayname:&7Fighter DAMAGE_ALL:1 "
+      HideEnchants: false #Whether enchants should be hidden
+    Items:
+      HeadSlot: "DIAMOND_HELMET:0 1" #Simply put "none" if you do not want anything in slot
+      ChestSlot: "IRON_CHESTPLATE:0 1"
+      LegSlot: "IRON_LEGGINGS:0 1"
+      BootSlot: "DIAMOND_BOOTS:0 1"
+      Inventory:
+        - "DIAMOND_SWORD:0 1 displayname:&aTrusty_Sword DAMAGE_ALL:1"
+        - "GRILLED_PORK:0 16"
+  Archer:
+    DisplayIcon:
+      DisplayMaterial: "BOW:0 1 displayname:&7Archer ARROW_DAMAGE:3 ARROW_KNOCKBACK:1 "
+      HideEnchants: false
+    Items:
+      HeadSlot: "LEATHER_HELMET:0 1"
+      ChestSlot: "CHAINMAIL_CHESTPLATE:0 1"
+      LegSlot: "CHAINMAIL_LEGGINGS:0 1"
+      BootSlot: "LEATHER_BOOTS:0 1"
+      Inventory:
+        - "BOW:0 1 ARROW_DAMAGE:3 ARROW_KNOCKBACK:1"
+        - "ARROW:0 32"
+        - "STONE_SWORD:0 1"
+        - "GRILLED_PORK:0 16"

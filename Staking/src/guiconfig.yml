@@ -1,0 +1,48 @@
+#Use this config for editing GUI settings
+
+#Replace %PLAYER1% for the player, and %PLAYER2% for their opponent
+StakeInventoryName: "&7<= My Staking | Their Staking =>"
+
+#Not Accepted Item - shown when the user has not accepted the stake yet
+NotAcceptedItem: STAINED_GLASS_PANE:14
+NotAcceptedDisplayName: "&c&lNOT ACCEPTED"
+#Accepted Item - shown when the user has accepted the trade
+AcceptedItem: STAINED_GLASS_PANE:5
+AcceptedDisplayName: "&a&LACCEPTED"
+
+#The item that is located down the middle of the inventory (the divider)
+DividerItem: STAINED_GLASS_PANE:15
+
+#If Vault is enabled, would you like a money option in the GUI to appear where users can deposit money?
+EnableMoneyInGUI: true
+MoneyItem: GOLD_INGOT:0
+#Increments
+RightClick: -10
+LeftClick: 10
+ShiftRightClick: -100
+ShiftLeftClick: 100
+
+#This is the item that is shown to the user - Replace %AMOUNT% with the amount that the player has put up
+PlayersMoneyDisplayName: "&7Your current stake is &e$%AMOUNT%"
+#The lore of their money item, %RIGHTCLICK%, %LEFTCLICK%, %SHIFTRIGHTCLICK% and %SHIFTLEFTCLICK% can be used in order to get the prices
+PlayersMoneyLore:
+  - "&aLeft click to &craise &aby &e$%LEFTCLICK%"
+  - "&aRight click to &clower &aby &e$%RIGHTCLICK%"
+  - "&aShift Left click to &craise &aby &e$%SHIFTLEFTCLICK%"
+  - "&aShift Right click to &clower &aby &e$%SHIFTRIGHTCLICK%"
+
+#When the opponent places money up, the display name of the item will be this:
+# (Replace %OPPONENTSAMOUNT% with the amount that they have staked)
+OpponentsMoneyDisplayName: "&7Their current stake is &e$%OPPONENTSAMOUNT%"
+OpponentsLore:
+  - "&aThis is the amount of money they have bet!"
+
+#Noises - https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Sound.html (This may differ depending on Spigot version) - Set any to 'none' for no noise to occur
+ChangeMoneyNoise: ENTITY_EXPERIENCE_ORB_PICKUP
+AddItemNoise: none #BLOCK_NOTE_CHIME
+CountDownNoise: BLOCK_NOTE_PLING
+EndCountDownNoise: ENTITY_PLAYER_LEVELUP #This sound is played on 0, when they are tp'd to the arena
+
+
+#This item is shown as a filler, when no money is at stake for example
+DudItem: STAINED_GLASS_PANE:15
