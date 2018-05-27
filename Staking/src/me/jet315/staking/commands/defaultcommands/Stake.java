@@ -5,6 +5,10 @@ import me.jet315.staking.StakePlayer;
 import me.jet315.staking.commands.CommandExecutor;
 import me.jet315.staking.manager.StakeManager;
 import me.jet315.staking.utils.StakePhase;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.md_5.bungee.api.chat.HoverEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
@@ -75,7 +79,14 @@ public class Stake extends CommandExecutor {
 
         //send the person a request to fight
         Core.getInstance().getStakingPlayerManager().getRecentDuels().put(p,targetPlayer);
-        targetPlayer.sendMessage(Core.getInstance().getMessages().getDuelRequest().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()).replaceAll("%PLAYER%",p.getName()));
+
+        TextComponent message = new TextComponent(Core.getInstance().getMessages().getDuelRequest().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()).replaceAll("%PLAYER%",p.getName()));
+
+        message.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/stake " + p.getName()));
+        targetPlayer.spigot().sendMessage(message);
+        //targetPlayer.sendMessage(Core.getInstance().getMessages().getDuelRequest().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()).replaceAll("%PLAYER%",p.getName()));
+
+
         p.sendMessage(Core.getInstance().getMessages().getDuelSent().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()).replaceAll("%PLAYER%",args[0]));
         Bukkit.getScheduler().runTaskLater(Core.getInstance(), new Runnable() {
             @Override
