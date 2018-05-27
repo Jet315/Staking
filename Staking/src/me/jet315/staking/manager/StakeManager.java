@@ -66,11 +66,19 @@ public class StakeManager {
         stakePlayer.setStakePhase(StakePhase.FIGHTING);
         stakePlayer2.setStakePhase(StakePhase.FIGHTING);
         int availableKits = Core.getInstance().getKitManager().getAvailableKits().size();
+
+        //bet items stuff
+        Player p = stakePlayer.getPlayer();
+        stakePlayer.setBetItems(InvUtils.getItemsInInventory(p));
+
+        //second player
+        Player p2 = stakePlayer2.getPlayer();
+        stakePlayer2.setBetItems(InvUtils.getItemsInInventory(p2));
+
+
         if(availableKits != 0) {
             //first player
 
-            Player p = stakePlayer.getPlayer();
-            stakePlayer.setBetItems(InvUtils.getItemsInInventory(p));
 
             p.closeInventory();
 
@@ -86,9 +94,6 @@ public class StakeManager {
 
             InvUtils.clearInventory(p);
 
-            //second player
-            Player p2 = stakePlayer2.getPlayer();
-            stakePlayer2.setBetItems(InvUtils.getItemsInInventory(p2));
             p2.closeInventory();
             InvUtils.clearItemInOffHand(p2);
             ArrayList<ItemStack> playersItems2 = InvUtils.getPlayersInventoryItems(p2);

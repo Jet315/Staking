@@ -38,36 +38,39 @@ public class KitManager {
     }
     private void loadKitsFromConfig(){
         FileConfiguration config = getFileConfiguration();
-        for (String kitName : config.getConfigurationSection("Kits").getKeys(false)) {
-            try {
-                //Get the path as a string, so it is easy to get future values from the config
-                String path = "Kits." + kitName;
-                //Display Item
-                ItemStack displayItem = Utils.parseItemStackFromString(config.getString(path + ".DisplayIcon.DisplayMaterial"));
-                if(config.getBoolean(path + ".DisplayIcon.HideEnchants")){
-                    ItemMeta displayMeta = displayItem.getItemMeta();
-                    displayMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                    displayItem.setItemMeta(displayMeta);
+        if(config.getConfigurationSection("Kits") != null) {
+            for (String kitName : config.getConfigurationSection("Kits").getKeys(false)) {
+                try {
+                    //Get the path as a string, so it is easy to get future values from the config
+                    String path = "Kits." + kitName;
+                    //Display Item
+                    ItemStack displayItem = Utils.parseItemStackFromString(config.getString(path + ".DisplayIcon.DisplayMaterial"));
+                    if (config.getBoolean(path + ".DisplayIcon.HideEnchants")) {
+                        ItemMeta displayMeta = displayItem.getItemMeta();
+                        displayMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+                        displayItem.setItemMeta(displayMeta);
+                    }
+                    ItemStack headSlot = Utils.parseItemStackFromString(config.getString(path + ".Items.HeadSlot"));
+                    ItemStack chestSlot = Utils.parseItemStackFromString(config.getString(path + ".Items.ChestSlot"));
+                    ItemStack legSlot = Utils.parseItemStackFromString(config.getString(path + ".Items.LegSlot"));
+                    ItemStack bootSlot = Utils.parseItemStackFromString(config.getString(path + ".Items.BootSlot"));
+                    ArrayList<ItemStack> inventoryItems = new ArrayList<>();
+
+                    for (String string : config.getStringList(path + ".Items.Inventory")) {
+
+                        inventoryItems.add(Utils.parseItemStackFromString(string));
+                    }
+                    IInterfaceKitSave kit = new KitInventorySave(displayItem, headSlot, chestSlot, legSlot, bootSlot, inventoryItems);
+                    availableKits.put(kitName, kit);
+
+                } catch (Exception e) {
+                    System.out.println("[Staking] Error loading kit: " + kitName);
                 }
-                ItemStack headSlot = Utils.parseItemStackFromString(config.getString(path + ".Items.HeadSlot"));
-                ItemStack chestSlot = Utils.parseItemStackFromString(config.getString(path + ".Items.ChestSlot"));
-                ItemStack legSlot = Utils.parseItemStackFromString(config.getString(path + ".Items.LegSlot"));
-                ItemStack bootSlot = Utils.parseItemStackFromString(config.getString(path + ".Items.BootSlot"));
-                ArrayList<ItemStack> inventoryItems = new ArrayList<>();
-
-                for(String string : config.getStringList(path + ".Items.Inventory")){
-
-                    inventoryItems.add(Utils.parseItemStackFromString(string));
-                }
-                IInterfaceKitSave kit = new KitInventorySave(displayItem,headSlot,chestSlot,legSlot,bootSlot,inventoryItems);
-                availableKits.put(kitName,kit);
-
-            }catch(Exception e){
-                System.out.println("[Staking] Error loading kit: " + kitName);
             }
         }
         System.out.println("[Staking] " + availableKits.size() + " kits loaded!");
     }
+
 
     public Inventory getKitInventory(){
         Inventory inventory = Bukkit.createInventory(null,size,inventoryName);
