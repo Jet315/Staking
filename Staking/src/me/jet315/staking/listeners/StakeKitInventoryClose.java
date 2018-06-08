@@ -2,6 +2,7 @@ package me.jet315.staking.listeners;
 
 import me.jet315.staking.Core;
 import me.jet315.staking.StakePlayer;
+import me.jet315.staking.utils.StakePhase;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,10 +17,11 @@ public class StakeKitInventoryClose implements Listener {
 
         if (e.getInventory().getName().equals(Core.getInstance().getKitManager().getInventoryName())) {
             //closed kit
-
             //Get stake player
             StakePlayer stakePlayer = Core.getInstance().getStakingPlayerManager().getStakePlayer((Player) e.getPlayer());
                 if(stakePlayer != null){
+                    //check if in reset phase
+                    if(stakePlayer.getStakePhase() == StakePhase.RESET) return;
                     //See if has selected kit, if not, stop  them from closing the inventory
                     if(!stakePlayer.isHasSelectedKit()){
                         Bukkit.getServer().getScheduler().runTaskLater(Core.getInstance(), new Runnable() {

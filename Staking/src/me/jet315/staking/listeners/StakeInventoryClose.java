@@ -23,6 +23,7 @@ public class StakeInventoryClose implements Listener {
             StakePlayer stakePlayer = Core.getInstance().getStakingPlayerManager().getStakePlayer((Player) e.getPlayer());
             if (stakePlayer != null) {
                 //prevents items being given if the inventory closes due to tping into arena
+                if(stakePlayer.getStakePhase() == StakePhase.RESET) return;
                 if(stakePlayer.getStakePhase() != StakePhase.TRADING) return;
 
                 StakePlayer stakeOpponent = stakePlayer.getOpponent();

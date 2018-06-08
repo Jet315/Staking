@@ -96,19 +96,20 @@ public class Core extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        Bukkit.getServer().getScheduler().cancelTasks(this);
+        stakingPlayerManager.forceKickAllPlayersFromDuels();
+
         for (Arena arena : arenaManager.getActiveArenas().values()) {
             for (Block b : arena.getBlocksChangedToBarriers()) {
                 b.setType(Material.AIR);
             }
             arena.setResetArena(true);
         }
-        stakingPlayerManager.forceKickAllPlayersFromDuels();
 
         //save player data
         for(StatsPlayer statsPlayer : statsManager.getPlayerStats().values()){
             db.forceSyncPlayersData(statsPlayer);
         }
-        Bukkit.getServer().getScheduler().cancelTasks(this);
         arenaManager = null;
         kitManager = null;
         stakingPlayerManager = null;
@@ -117,22 +118,28 @@ public class Core extends JavaPlugin {
         db = null;
         messages = null;
         properties = null;
+
         instance = null;
     }
 
     private void registerEvents() {
         Bukkit.getPluginManager().registerEvents(new StakeInventoryClick(), this);
         Bukkit.getPluginManager().registerEvents(new KitsInventoryClick(), this);
-        Bukkit.getPluginManager().registerEvents(new InventoryDrag(), this);
+        Bukkit.getPluginManager().registerEvents(new StakingInventoryDrag(), this);
         Bukkit.getPluginManager().registerEvents(new StakeInventoryClose(), this);
         Bukkit.getPluginManager().registerEvents(new StakeKitInventoryClose(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDeath(), this);
         Bukkit.getPluginManager().registerEvents(new McMMOListeners(), this);
         Bukkit.getPluginManager().registerEvents(new DuelQuit(), this);
         Bukkit.getPluginManager().registerEvents(new StatsListeners(), this);
+        if(properties.isEnableQuickStatsCommand()){
+            Bukkit.getPluginManager().registerEvents(new StatsCommandListener(),this);
+        }
     }
 
     public void reloadPlugin() {
+        Bukkit.getServer().getScheduler().cancelTasks(this);
+        stakingPlayerManager.forceKickAllPlayersFromDuels();
         //Reset barriers
         for (Arena arena : arenaManager.getActiveArenas().values()) {
             for (Block b : arena.getBlocksChangedToBarriers()) {
@@ -140,7 +147,6 @@ public class Core extends JavaPlugin {
             }
             arena.setResetArena(true);
         }
-        stakingPlayerManager.forceKickAllPlayersFromDuels();
 
         arenaManager = null;
         kitManager = null;

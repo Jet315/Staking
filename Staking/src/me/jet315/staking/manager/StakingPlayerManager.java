@@ -27,16 +27,15 @@ public class StakingPlayerManager {
     /**
      * Stores the players who are in the fighting, with their saved inventories
      */
-    private Map<Player,IInterfacePlayerSave> inventorySaves = new HashMap<>();
+    private Map<Player, IInterfacePlayerSave> inventorySaves = new HashMap<>();
 
     /**
      * Stores players who have recently sent a duel request
      * Stores Player who sent the request | player who the request is for
      */
-    private Map<Player,Player> recentDuels = new HashMap<>();
+    private Map<Player, Player> recentDuels = new HashMap<>();
 
     /**
-     *
      * @param players Adds specified players from the stake array
      */
     public void addPlayerToStake(StakePlayer... players) {
@@ -51,10 +50,9 @@ public class StakingPlayerManager {
     }
 
     /**
-     *
      * @param players Removes specified players from the stake array
      */
-    public void removePlayerFromStake(StakePlayer... players){
+    public void removePlayerFromStake(StakePlayer... players) {
         for (StakePlayer player : players) {
             if (playersInStake.contains(player)) {
                 playersInStake.remove(player);
@@ -65,52 +63,52 @@ public class StakingPlayerManager {
     /**
      * Force kick all players from all arenas and refund items+Betting items (used in Reload, or in server stop)
      */
-    public void forceKickAllPlayersFromDuels(){
-        for(StakePlayer p : playersInStake){
-            p.getPlayer().sendMessage(Core.getInstance().getMessages().getForceKickOutOfDuel().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()));
-            if(p.getStakePhase() == StakePhase.TRADING){
-                //the close inventory event will be called and deal with removing both players from the array
-                p.getPlayer().closeInventory();
-            }else{
-                InvUtils.clearInventory(p.getPlayer());
-                //refund items & money
-                //refund inventory that was cleared
-                InvUtils.loadPlayerSave(p.getPlayer(),getInventorySaves().get(p.getPlayer()));
-                getInventorySaves().remove(p.getPlayer());
+    public void forceKickAllPlayersFromDuels() {
+        for (StakePlayer p : playersInStake) {
 
+            p.getPlayer().sendMessage(Core.getInstance().getMessages().getForceKickOutOfDuel().replaceAll("%PLUGINPREFIX%", Core.getInstance().getProperties().getPluginsPrefix()));
+            p.setStakePhase(StakePhase.RESET);
+            p.getPlayer().closeInventory();
+            p.getPlayer().updateInventory();
 
-                if(p.getPlayersPreviousLocation() != null) {
-                    String lastLocationOrWorld = Core.getInstance().getProperties().getWhereToTeleportAfterDuel();
-                    if (lastLocationOrWorld.equalsIgnoreCase("lastlocation") || Bukkit.getWorld(lastLocationOrWorld) == null) {
-                        p.getPlayer().teleport(p.getPlayersPreviousLocation());
-                    } else {
-                        World world = Bukkit.getWorld(lastLocationOrWorld);
-                        p.getPlayer().teleport(world.getSpawnLocation());
+            InvUtils.clearInventory(p.getPlayer());
 
-                    }
-                }
-                //refund items bet & money
-                if (Core.economy != null) {
-                    Core.economy.depositPlayer(p.getPlayer(),p.getBetMoney());
-                }
+            //refund inventory that was cleared
+            InvUtils.loadPlayerSave(p.getPlayer(), getInventorySaves().get(p.getPlayer()));
+            getInventorySaves().remove(p.getPlayer());
 
-                for(ItemStack item : p.getBetItems()){
-                    p.getPlayer().getInventory().addItem(item);
+            if (p.getPlayersPreviousLocation() != null) {
+                String lastLocationOrWorld = Core.getInstance().getProperties().getWhereToTeleportAfterDuel();
+                if (lastLocationOrWorld.equalsIgnoreCase("lastlocation") || Bukkit.getWorld(lastLocationOrWorld) == null) {
+                    p.getPlayer().teleport(p.getPlayersPreviousLocation());
+                } else {
+                    World world = Bukkit.getWorld(lastLocationOrWorld);
+                    p.getPlayer().teleport(world.getSpawnLocation());
+
                 }
-                for(ItemStack item : p.getBetItems()){
-                    p.getPlayer().getInventory().addItem(item);
-                }
-                //reset arena
-                if(p.getArena() != null){
-                    p.getArena().setArenaActive(false);
-                    p.getArena().setResetArena(true);
-                }
-                //Remove from arena list
-                playersInStake.remove(p);
-                p.getPlayer().closeInventory();
-                Utils.healPlayers(p.getPlayer());
             }
+
+            //refund items bet & money
+            if (Core.economy != null) {
+                Core.economy.depositPlayer(p.getPlayer(), p.getBetMoney());
+            }
+
+            for (ItemStack item : p.getBetItems()) {
+                p.getPlayer().getInventory().addItem(item);
+            }
+
+            //reset arena
+            if (p.getArena() != null) {
+                p.getArena().setArenaActive(false);
+                p.getArena().setResetArena(true);
+            }
+
+
+            Utils.healPlayers(p.getPlayer());
+
+
         }
+        playersInStake.clear();
 
     }
 
@@ -120,11 +118,11 @@ public class StakingPlayerManager {
     public void forceKickPlayersFromDuel(StakePlayer... players) {
         for (StakePlayer player : players) {
             IInterfacePlayerSave inventorySave = Core.getInstance().getStakingPlayerManager().getInventorySaves().get(player.getPlayer());
-           if( inventorySave != null) {
-               InvUtils.clearInventory(player.getPlayer());
-               InvUtils.loadPlayerSave(player.getPlayer(),inventorySave );
-               Core.getInstance().getStakingPlayerManager().getInventorySaves().remove(player.getPlayer());
-           }
+            if (inventorySave != null) {
+                InvUtils.clearInventory(player.getPlayer());
+                InvUtils.loadPlayerSave(player.getPlayer(), inventorySave);
+                Core.getInstance().getStakingPlayerManager().getInventorySaves().remove(player.getPlayer());
+            }
 
 
             //refund items bet & money
@@ -136,7 +134,7 @@ public class StakingPlayerManager {
                 player.getPlayer().getInventory().addItem(item);
             }
 
-            if(player.getPlayersPreviousLocation() != null) {
+            if (player.getPlayersPreviousLocation() != null) {
                 String lastLocationOrWorld = Core.getInstance().getProperties().getWhereToTeleportAfterDuel();
                 if (lastLocationOrWorld.equalsIgnoreCase("lastlocation") || Bukkit.getWorld(lastLocationOrWorld) == null) {
                     player.getPlayer().teleport(player.getPlayersPreviousLocation());
@@ -148,9 +146,9 @@ public class StakingPlayerManager {
             }
 
             //reset arena
-            if(player.getArena() != null){
-               player.getArena().setArenaActive(false);
-               player.getArena().setResetArena(true);
+            if (player.getArena() != null) {
+                player.getArena().setArenaActive(false);
+                player.getArena().setResetArena(true);
             }
 
             //Remove from arena list
@@ -162,13 +160,12 @@ public class StakingPlayerManager {
     }
 
     /**
-     *
      * @param p The player
      * @return A StakePlayer, or null if non existent
      */
-    public StakePlayer getStakePlayer(Player p){
-        for(StakePlayer player : playersInStake){
-            if(player.getPlayer() == p){
+    public StakePlayer getStakePlayer(Player p) {
+        for (StakePlayer player : playersInStake) {
+            if (player.getPlayer() == p) {
                 return player;
             }
         }
@@ -176,14 +173,13 @@ public class StakingPlayerManager {
     }
 
 
-
     /**
      * @return The players who are currently in the trade menu
      */
-    public ArrayList<StakePlayer> getPlayersInStakeInventory(){
+    public ArrayList<StakePlayer> getPlayersInStakeInventory() {
         ArrayList<StakePlayer> stakePlayers = new ArrayList<>();
-        for(StakePlayer stakePlayer : playersInStake){
-            if(stakePlayer.getStakePhase() == StakePhase.TRADING){
+        for (StakePlayer stakePlayer : playersInStake) {
+            if (stakePlayer.getStakePhase() == StakePhase.TRADING) {
                 stakePlayers.add(stakePlayer);
             }
         }
@@ -193,10 +189,10 @@ public class StakingPlayerManager {
     /**
      * @return The players who are currently dueling
      */
-    public ArrayList<StakePlayer> getPlayersFighting(){
+    public ArrayList<StakePlayer> getPlayersFighting() {
         ArrayList<StakePlayer> stakePlayers = new ArrayList<>();
-        for(StakePlayer stakePlayer : playersInStake){
-            if(stakePlayer.getStakePhase() == StakePhase.FIGHTING){
+        for (StakePlayer stakePlayer : playersInStake) {
+            if (stakePlayer.getStakePhase() == StakePhase.FIGHTING) {
                 stakePlayers.add(stakePlayer);
             }
         }

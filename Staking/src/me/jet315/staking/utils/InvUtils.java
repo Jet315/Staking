@@ -96,10 +96,19 @@ public class InvUtils {
      */
     public static ArrayList<ItemStack> getPlayersInventoryItems(Player p) {
         ArrayList<ItemStack> playersItems = new ArrayList<>();
-        for (ItemStack itemInInventory : p.getInventory().getStorageContents()) {
-            if (itemInInventory != null && itemInInventory.getType() != Material.AIR) {
-                playersItems.add(itemInInventory.clone());
+        if(Core.serverVersion.startsWith("v1_8")){
+            for(ItemStack itemInInventory : p.getInventory().getContents()){
+                if (itemInInventory != null && itemInInventory.getType() != Material.AIR) {
+                    playersItems.add(itemInInventory.clone());
 
+                }
+            }
+        }else {
+            for (ItemStack itemInInventory : p.getInventory().getStorageContents()) {
+                if (itemInInventory != null && itemInInventory.getType() != Material.AIR) {
+                    playersItems.add(itemInInventory.clone());
+
+                }
             }
         }
         return playersItems;
@@ -110,10 +119,12 @@ public class InvUtils {
      * @param p The player
      */
     public static void clearItemInOffHand(Player p){
-        if(p.getInventory().getItemInOffHand() != null && p.getInventory().getItemInOffHand().getType() != Material.AIR){
-            ItemStack materialInOffHand = p.getInventory().getItemInOffHand().clone();
-            p.getInventory().addItem(materialInOffHand);
-            p.getInventory().getItemInOffHand().setType(Material.AIR);
+        if(Core.serverVersion.startsWith("v1_12")) {
+            if (p.getInventory().getItemInOffHand() != null && p.getInventory().getItemInOffHand().getType() != Material.AIR) {
+                ItemStack materialInOffHand = p.getInventory().getItemInOffHand().clone();
+                p.getInventory().addItem(materialInOffHand);
+                p.getInventory().getItemInOffHand().setType(Material.AIR);
+            }
         }
     }
 

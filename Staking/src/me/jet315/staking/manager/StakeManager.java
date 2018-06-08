@@ -123,6 +123,7 @@ public class StakeManager {
             arena.setArenaActive(true);
             stakePlayer.setPlayersPreviousLocation(stakePlayer.getPlayer().getLocation());
             stakePlayer2.setPlayersPreviousLocation(stakePlayer2.getPlayer().getLocation());
+
             stakePlayer.getPlayer().teleport(arena.getSpawnLocation1());
             stakePlayer.getOpponent().getPlayer().teleport(arena.getSpawnLocation2());
             stakePlayer.setArena(arena);
@@ -173,7 +174,9 @@ public class StakeManager {
                }
            }
        }
+
         }
+
         //See if kits exist - The loading kit bit
         int availableKits = Core.getInstance().getKitManager().getAvailableKits().size();
         if(availableKits == 1 || timeToWait <= 0){

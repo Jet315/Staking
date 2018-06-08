@@ -36,19 +36,20 @@ public class Stake extends CommandExecutor {
     public void execute(CommandSender sender, String[] args) {
         //Can cast as was already checked
         Player p = (Player) sender;
-
-        //Check to see if sending the request to him/her self
-        if(p.getName().equalsIgnoreCase(args[0])){
-            p.sendMessage(Core.getInstance().getMessages().getDuelSentToSelf().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()));
-            return;
-        }
-
         Player targetPlayer = Bukkit.getPlayer(args[0]);
 
         if (targetPlayer == null) {
             p.sendMessage(Core.getInstance().getMessages().getInvalidTarget().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()).replaceAll("%PLAYER%",args[0]));
             return;
         }
+
+        //Check to see if sending the request to him/her self
+        if(p.getName().equalsIgnoreCase(args[0]) || targetPlayer == p){
+            p.sendMessage(Core.getInstance().getMessages().getDuelSentToSelf().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()));
+            return;
+        }
+
+
 
         //check if the player performing the command already is in a duel
         if(Core.getInstance().getStakingPlayerManager().getStakePlayer(p) != null){
@@ -58,7 +59,7 @@ public class Stake extends CommandExecutor {
 
         //check if opponent is in duel
         if(Core.getInstance().getStakingPlayerManager().getStakePlayer(targetPlayer) != null){
-            p.sendMessage(Core.getInstance().getMessages().getTargetPlayerIsInDuel().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()).replaceAll("%PLAYER%",args[0]));
+            p.sendMessage(Core.getInstance().getMessages().getTargetPlayerIsInDuel().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()).replaceAll("%PLAYER%",targetPlayer.getName()));
             return;
         }
         //check to see if the target player has sent a duel
@@ -87,13 +88,13 @@ public class Stake extends CommandExecutor {
         //targetPlayer.sendMessage(Core.getInstance().getMessages().getDuelRequest().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()).replaceAll("%PLAYER%",p.getName()));
 
 
-        p.sendMessage(Core.getInstance().getMessages().getDuelSent().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()).replaceAll("%PLAYER%",args[0]));
+        p.sendMessage(Core.getInstance().getMessages().getDuelSent().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()).replaceAll("%PLAYER%",targetPlayer.getName()));
         Bukkit.getScheduler().runTaskLater(Core.getInstance(), new Runnable() {
             @Override
             public void run() {
                 if(Core.getInstance().getStakingPlayerManager().getRecentDuels().containsKey(p)){
                     if(p.isOnline()){
-                        p.sendMessage(Core.getInstance().getMessages().getDuelExpired().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()).replaceAll("%PLAYER%",args[0]));
+                        p.sendMessage(Core.getInstance().getMessages().getDuelExpired().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()).replaceAll("%PLAYER%",targetPlayer.getName()));
                         Core.getInstance().getStakingPlayerManager().getRecentDuels().remove(p);
                     }
                 }

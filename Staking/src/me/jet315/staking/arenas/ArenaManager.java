@@ -92,8 +92,7 @@ public class ArenaManager {
      * @param gameID The game Id
      */
     public void setSpawnLocation1(Location locationOfPlayer, String gameID){
-
-        config.set("Arenas."+ gameID + ".spawnLocation1",locationOfPlayer.getWorld().getName()+","+locationOfPlayer.getX() +","+locationOfPlayer.getY()+","+locationOfPlayer.getZ() +","+locationOfPlayer.getYaw() +","+locationOfPlayer.getPitch());
+        config.set("Arenas."+ gameID + ".spawnLocation1",locationOfPlayer.getWorld().getName()+","+((int) locationOfPlayer.getX())+.5 +","+locationOfPlayer.getY()+","+((int) locationOfPlayer.getZ())+.5 +","+locationOfPlayer.getYaw() +","+locationOfPlayer.getPitch());
         activeArenas.get(gameID).setSpawnLocation1(locationOfPlayer);
         saveConfig();
 
@@ -105,7 +104,7 @@ public class ArenaManager {
      */
     public void setSpawnLocation2(Location locationOfPlayer, String gameID){
 
-        config.set("Arenas."+ gameID + ".spawnLocation2",locationOfPlayer.getWorld().getName()+","+locationOfPlayer.getX() +","+locationOfPlayer.getY()+","+locationOfPlayer.getZ() +","+locationOfPlayer.getYaw() +","+locationOfPlayer.getPitch());
+        config.set("Arenas."+ gameID + ".spawnLocation2",locationOfPlayer.getWorld().getName()+","+((int) locationOfPlayer.getX())+.5 +","+ locationOfPlayer.getY()+","+((int) locationOfPlayer.getZ())+.5 +","+locationOfPlayer.getYaw() +","+locationOfPlayer.getPitch());
         activeArenas.get(gameID).setSpawnLocation2(locationOfPlayer);
         saveConfig();
 
