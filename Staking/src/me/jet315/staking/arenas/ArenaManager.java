@@ -81,7 +81,16 @@ public class ArenaManager {
         activeArenas.put(gameID,arena);
 
     }
+    public void deleteArena(String gameID){
+        //Putting into config
+        if(activeArenas.containsKey(gameID)){
+            activeArenas.remove(gameID);
+            config.set("Arenas." + gameID, null);
 
+            saveConfig();
+        }
+
+    }
     public boolean doesArenaExist(String gameID){
         return activeArenas.containsKey(gameID);
     }
@@ -92,8 +101,13 @@ public class ArenaManager {
      * @param gameID The game Id
      */
     public void setSpawnLocation1(Location locationOfPlayer, String gameID){
-        config.set("Arenas."+ gameID + ".spawnLocation1",locationOfPlayer.getWorld().getName()+","+((int) locationOfPlayer.getX())+.5 +","+locationOfPlayer.getY()+","+((int) locationOfPlayer.getZ())+.5 +","+locationOfPlayer.getYaw() +","+locationOfPlayer.getPitch());
-        activeArenas.get(gameID).setSpawnLocation1(locationOfPlayer);
+        World world = locationOfPlayer.getWorld();
+        double x = locationOfPlayer.getX() < 0 ? ((int) locationOfPlayer.getX())-0.5 : ((int) locationOfPlayer.getX())+0.5;
+        double y = locationOfPlayer.getY() < 0 ? ((int) locationOfPlayer.getY())-0.5 : ((int) locationOfPlayer.getY())+0.5;
+        double z = locationOfPlayer.getZ() < 0 ? ((int) locationOfPlayer.getZ())-0.5 : ((int) locationOfPlayer.getZ())+0.5;
+        config.set("Arenas."+ gameID + ".spawnLocation1",world.getName()+","+x +","+ y+","+z +","+locationOfPlayer.getYaw() +","+locationOfPlayer.getPitch());
+
+        activeArenas.get(gameID).setSpawnLocation1(new Location(world,x,y,z,locationOfPlayer.getYaw(),locationOfPlayer.getPitch()));
         saveConfig();
 
     }
@@ -104,8 +118,13 @@ public class ArenaManager {
      */
     public void setSpawnLocation2(Location locationOfPlayer, String gameID){
 
-        config.set("Arenas."+ gameID + ".spawnLocation2",locationOfPlayer.getWorld().getName()+","+((int) locationOfPlayer.getX())+.5 +","+ locationOfPlayer.getY()+","+((int) locationOfPlayer.getZ())+.5 +","+locationOfPlayer.getYaw() +","+locationOfPlayer.getPitch());
-        activeArenas.get(gameID).setSpawnLocation2(locationOfPlayer);
+        World world = locationOfPlayer.getWorld();
+        double x = locationOfPlayer.getX() < 0 ? ((int) locationOfPlayer.getX())-0.5 : ((int) locationOfPlayer.getX())+0.5;
+        double y = locationOfPlayer.getY() < 0 ? ((int) locationOfPlayer.getY())-0.5 : ((int) locationOfPlayer.getY())+0.5;
+        double z = locationOfPlayer.getZ() < 0 ? ((int) locationOfPlayer.getZ())-0.5 : ((int) locationOfPlayer.getZ())+0.5;
+        config.set("Arenas."+ gameID + ".spawnLocation2",world.getName()+","+x +","+ y+","+z +","+locationOfPlayer.getYaw() +","+locationOfPlayer.getPitch());
+
+        activeArenas.get(gameID).setSpawnLocation2(new Location(world,x,y,z,locationOfPlayer.getYaw(),locationOfPlayer.getPitch()));
         saveConfig();
 
     }

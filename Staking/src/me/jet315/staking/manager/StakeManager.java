@@ -97,10 +97,10 @@ public class StakeManager {
             p2.closeInventory();
             InvUtils.clearItemInOffHand(p2);
             ArrayList<ItemStack> playersItems2 = InvUtils.getPlayersInventoryItems(p2);
-            IInterfacePlayerSave player2Save = new PlayerInventorySave(p.getInventory().getHelmet() == null ? new ItemStack(Material.AIR) : p.getInventory().getHelmet().clone(),
-                    p.getInventory().getChestplate() == null ? new ItemStack(Material.AIR) : p.getInventory().getChestplate().clone(),
-                    p.getInventory().getLeggings() == null ? new ItemStack(Material.AIR) : p.getInventory().getLeggings().clone(),
-                    p.getInventory().getBoots() == null ? new ItemStack(Material.AIR) : p.getInventory().getBoots().clone(),
+            IInterfacePlayerSave player2Save = new PlayerInventorySave(p2.getInventory().getHelmet() == null ? new ItemStack(Material.AIR) : p2.getInventory().getHelmet().clone(),
+                    p2.getInventory().getChestplate() == null ? new ItemStack(Material.AIR) : p2.getInventory().getChestplate().clone(),
+                    p2.getInventory().getLeggings() == null ? new ItemStack(Material.AIR) : p2.getInventory().getLeggings().clone(),
+                    p2.getInventory().getBoots() == null ? new ItemStack(Material.AIR) : p2.getInventory().getBoots().clone(),
                     playersItems2, p2.getLocation());
             InvUtils.clearInventory(p2);
 
@@ -268,10 +268,10 @@ public class StakeManager {
                     String messageToSend = Core.getInstance().getMessages().getMatchEndDueToTime().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix());
                     stakePlayer.getPlayer().sendMessage(messageToSend);
                     stakePlayer2.getPlayer().sendMessage(messageToSend);
-                    if(availableKits != 0) {
+ /*                   if(availableKits != 0) {
                         InvUtils.clearInventory(stakePlayer.getPlayer());
                         InvUtils.clearInventory(stakePlayer2.getPlayer());
-                    }
+                    }*/
                     Core.getInstance().getStakingPlayerManager().forceKickPlayersFromDuel(stakePlayer,stakePlayer2);
                     //It's ended, so reset
                     arena.setResetArena(false);

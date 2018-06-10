@@ -2,6 +2,7 @@ package me.jet315.staking.commands;
 
 import me.jet315.staking.Core;
 import me.jet315.staking.commands.admincommands.CreateArena;
+import me.jet315.staking.commands.admincommands.DeleteArena;
 import me.jet315.staking.commands.admincommands.Reload;
 import me.jet315.staking.commands.admincommands.SetSpawn;
 import me.jet315.staking.commands.defaultcommands.Stake;
@@ -23,6 +24,7 @@ public class CommandHandler implements org.bukkit.command.CommandExecutor {
         //Player commands
         commands.put("*",new Stake());
         commands.put("createarena",new CreateArena());
+        commands.put("deletearena",new DeleteArena());
         commands.put("setspawn",new SetSpawn());
         commands.put("reload",new Reload());
         commands.put("stats",new Stats());

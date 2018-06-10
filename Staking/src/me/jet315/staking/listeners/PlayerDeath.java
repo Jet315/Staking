@@ -69,6 +69,7 @@ public class PlayerDeath implements Listener {
                         public void run() {*/
                     //Reset inventories
                     IInterfacePlayerSave playerWhoDiedInventorySave = Core.getInstance().getStakingPlayerManager().getInventorySaves().get(playerWhoDied);
+
                     if (playerWhoDiedInventorySave != null) {
                         InvUtils.clearInventory(playerWhoDied);
                         InvUtils.loadPlayerSave(playerWhoDied, playerWhoDiedInventorySave);

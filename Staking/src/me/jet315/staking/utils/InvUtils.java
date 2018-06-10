@@ -145,19 +145,21 @@ public class InvUtils {
      * @param p
      */
     public static void loadPlayerSave(Player p, IInterfaceSave playerSave){
-
         //adds items to body slots
         if(playerSave.getHeadSlot() != null && playerSave.getHeadSlot().getType() != Material.AIR){
             p.getInventory().setHelmet(playerSave.getHeadSlot());
         }
         if(playerSave.getBodySlot() != null && playerSave.getBodySlot().getType() != Material.AIR){
             p.getInventory().setChestplate(playerSave.getBodySlot());
+
         }
         if(playerSave.getLegsSlot() != null && playerSave.getLegsSlot().getType() != Material.AIR){
             p.getInventory().setLeggings(playerSave.getLegsSlot());
+
         }
         if(playerSave.getFeetSlot() != null && playerSave.getFeetSlot().getType() != Material.AIR){
-            p.getInventory().setHelmet(playerSave.getFeetSlot());
+            p.getInventory().setBoots(playerSave.getFeetSlot());
+
         }
 
         //adds rest of items to inventory

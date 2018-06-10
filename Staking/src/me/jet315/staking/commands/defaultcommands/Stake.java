@@ -2,6 +2,7 @@ package me.jet315.staking.commands.defaultcommands;
 
 import me.jet315.staking.Core;
 import me.jet315.staking.StakePlayer;
+import me.jet315.staking.arenas.Arena;
 import me.jet315.staking.commands.CommandExecutor;
 import me.jet315.staking.manager.StakeManager;
 import me.jet315.staking.utils.StakePhase;
@@ -75,6 +76,12 @@ public class Stake extends CommandExecutor {
         //check to see if they are in duel cooldown
         if(Core.getInstance().getStakingPlayerManager().getRecentDuels().containsKey(p)){
             p.sendMessage(Core.getInstance().getMessages().getDuelCooldown().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()));
+            return;
+        }
+
+        //Check to see if arena available
+        if(Core.getInstance().getArenaManager().getFreeArena() == null){
+            p.sendMessage(Core.getInstance().getMessages().getNoArenaFound().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()));
             return;
         }
 
