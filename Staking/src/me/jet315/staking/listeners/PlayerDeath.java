@@ -39,7 +39,7 @@ public class PlayerDeath implements Listener {
             }
 
             //check if player died
-            if ((playerWhoDied.getHealth() - e.getDamage()) <= 0) {
+            if ((playerWhoDied.getHealth() - e.getFinalDamage()) <= 0) {
 
                 StakePlayer playerWhoWon = playerWhoLost.getOpponent();
 
