@@ -30,6 +30,38 @@ DisableMcMMOAbilitiesDuringDuels: true
 MatchCountDownTime: 15
 #This is the duration (in seconds) that the match will last
 MatchTime: 300
+#Commands to block while players are dueling
+#The message that is shown when a user runs this command is located in the messages.yml file, under BlockedCommandMessage
+CommandsToBlockDuringFighting:
+  - "/spawn"
+  - "/espawn"
+  - "/tp"
+  - "/tpa"
+  - "/etp"
+  - "/etpa"
+  - "/tpahere"
+  - "/etpahere"
+  - "/etpccept"
+  - "/tpccept"
+  - "/god"
+  - "/fly"
+  - "/efly"
+  - "/sethome"
+  - "/esethome"
+  - "/vault"
+  - "/pv"
+  - "/pvault"
+  - "/feed"
+  - "/efeed"
+  - "/eheal"
+  - "/heal"
+  - "/home"
+  - "/ehome"
+  - "/ec"
+  - "/eec"
+  - "/enderchest"
+  - "/warp"
+  - "/ewarp"
 
 #Where would you like to teleport the players when the battle is over?
 #Either enter in a world name (and they will be teleported to the worlds spawn) or type 'LastLocation' for their last location

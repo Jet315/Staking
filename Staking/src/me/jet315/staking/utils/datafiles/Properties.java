@@ -6,6 +6,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Properties implements DataFile{
 
@@ -40,7 +42,10 @@ public class Properties implements DataFile{
     private boolean disableMcMMOAbilitiesDuringDuels = true;
     private String whereToTeleportAfterDuel;
 
-
+    /**
+     * Stores the commands to block in the arena
+     */
+    private List<String> commandsToBlock = new ArrayList<>();
     /**
      * Stores the File Configuration
      */
@@ -78,6 +83,7 @@ public class Properties implements DataFile{
         saveStatsInformation = config.getBoolean("SaveStatInformation");
         enableQuickStatsCommand = config.getBoolean("EnableQuickStatsCommand");
 
+        commandsToBlock = config.getStringList("CommandsToBlockDuringFighting");
     }
 
 
@@ -143,5 +149,9 @@ public class Properties implements DataFile{
 
     public boolean isEnableQuickStatsCommand() {
         return enableQuickStatsCommand;
+    }
+
+    public List<String> getCommandsToBlock() {
+        return commandsToBlock;
     }
 }

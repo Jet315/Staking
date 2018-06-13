@@ -132,6 +132,7 @@ public class Core extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new McMMOListeners(), this);
         Bukkit.getPluginManager().registerEvents(new DuelQuit(), this);
         Bukkit.getPluginManager().registerEvents(new StatsListeners(), this);
+        Bukkit.getPluginManager().registerEvents(new StakeCommandListener(), this);
         if(properties.isEnableQuickStatsCommand()){
             Bukkit.getPluginManager().registerEvents(new StatsCommandListener(),this);
         }

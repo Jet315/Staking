@@ -44,6 +44,7 @@ public class Messages implements DataFile{
     private String playerStats = "Your stats are great!";
     private String targetPlayerStats = "That persons stats are even better!";
     private String targetPlayerNotFound = "The person needs to be online..";
+    private String blockedCommandMessage = "Blocked!";
     private String errorOccurred = "Oh dear, a bug!";
 
     /**
@@ -118,6 +119,7 @@ public class Messages implements DataFile{
         playerStats = ChatColor.translateAlternateColorCodes('&',config.getString("PlayersStats"));
         targetPlayerStats = ChatColor.translateAlternateColorCodes('&',config.getString("TargetPlayerStats"));
         targetPlayerNotFound = ChatColor.translateAlternateColorCodes('&',config.getString("TargetPlayerNotFound"));
+        blockedCommandMessage = ChatColor.translateAlternateColorCodes('&',config.getString("BlockedCommandMessage"));
         errorOccurred = ChatColor.translateAlternateColorCodes('&',config.getString("ErrorOccurred"));
 
     }
@@ -243,5 +245,9 @@ public class Messages implements DataFile{
 
     public String getErrorOccurred() {
         return errorOccurred;
+    }
+
+    public String getBlockedCommandMessage() {
+        return blockedCommandMessage;
     }
 }

@@ -48,7 +48,8 @@ MessageMatchCountDown:
 WinnerMessage: "%PLUGINPREFIX%&aCongratulations! You won the duel!"
 #The message that is sent to the person who won, due to the opponent disconecting
 WinnerMessageDueToOpponentDisconnect: "%PLUGINPREFIX%&aCongratulations! You won due to your opponent quiting!"
-
+#Blocked command message
+BlockedCommandMessage: "%PLUGINPREFIX%&cThis command is block while you are dueling!"
 #The message sent to the person who list the duel
 LooserMessage: "%PLUGINPREFIX%&cUnlucky, You lost the duel"
 #After a while (such as if the users AFK within the arena) the match will expire. This is the message shown if the match timer reaches 0
