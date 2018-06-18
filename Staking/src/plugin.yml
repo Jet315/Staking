@@ -1,5 +1,5 @@
 name: Staking
-version: 1.3
+version: 1.4
 description: A new, better, way of staking!
 main: me.jet315.staking.Core
 softdepend: [Vault,McMMO]

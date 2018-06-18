@@ -62,7 +62,7 @@ ForceKickOutOfDuel: "%PLUGINPREFIX%&cThe plugin has been reloaded &6(Items have 
 #Stats messages
 #If the stats option is not enabled, this is the message that is sent
 StatsNotEnabled: "%PLUGINPREFIX%&cStats has not been enabled!"
-#Message of the players stats - Replace %WR% for the win/loose ratio, %WINS% for the total wins, and %LOOSES% for the looses
+#Message of the players stats - Replace %WR% for the win/lose ratio, %WINS% for the total wins, and %LOOSES% for the looses
 PlayersStats: "%PLUGINPREFIX%&6You have won &a%WINS%&6 games and lost &c%LOOSES%&6. Your win/loose ration is &e%WR%"
 #Similar to the above, however for a specified player, %TARGETPLAYER% can be used to get the target players name
 TargetPlayerStats: "%PLUGINPREFIX%&6%TARGETPLAYER% has won &a%WINS%&6 games and lost &c%LOOSES%&6. Your win/loose ratio is &e%WR%"

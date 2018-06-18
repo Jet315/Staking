@@ -231,7 +231,7 @@ public class StakeInventoryClick implements Listener {
             double playerBalance = Core.economy.getBalance(playerWhoClicked.getPlayer());
             if(!(playerBalance >= amountOfMoneyToSet)){
                 //Todo sound?
-                playerWhoClicked.getPlayer().sendMessage(Core.getInstance().getMessages().getNotEnoughFunds());
+                playerWhoClicked.getPlayer().sendMessage(Core.getInstance().getMessages().getNotEnoughFunds().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()));
                 return;
             }
 
