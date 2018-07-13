@@ -1,5 +1,6 @@
 package me.jet315.staking.manager;
 
+import com.earth2me.essentials.Essentials;
 import me.jet315.staking.Core;
 import me.jet315.staking.StakePlayer;
 import me.jet315.staking.arenas.Arena;
@@ -12,10 +13,7 @@ import me.jet315.staking.utils.InvUtils;
 import me.jet315.staking.utils.StakePhase;
 import me.jet315.staking.utils.Utils;
 import net.milkbowl.vault.economy.Economy;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -124,6 +122,18 @@ public class StakeManager {
             stakePlayer.setPlayersPreviousLocation(stakePlayer.getPlayer().getLocation());
             stakePlayer2.setPlayersPreviousLocation(stakePlayer2.getPlayer().getLocation());
 
+            //set gamemode
+            stakePlayer.getPlayer().setGameMode(GameMode.SURVIVAL);
+            stakePlayer2.getPlayer().setGameMode(GameMode.SURVIVAL);
+            stakePlayer.getPlayer().setFlying(false);
+            stakePlayer2.getPlayer().setFlying(false);
+            //Turn off flight
+            Essentials es = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
+            //null check needed
+            if(es != null) {
+                es.getUser(stakePlayer.getPlayer()).getBase().setFlying(false);
+                es.getUser(stakePlayer2.getPlayer()).getBase().setFlying(false);
+            }
             stakePlayer.getPlayer().teleport(arena.getSpawnLocation1());
             stakePlayer.getOpponent().getPlayer().teleport(arena.getSpawnLocation2());
             stakePlayer.setArena(arena);
