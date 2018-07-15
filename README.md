@@ -14,3 +14,4 @@ This plugin provides a way for players to stake items, or money, against other p
 - Works out the box, however very configurable
 
 Check out the resource page here:
+https://www.spigotmc.org/resources/%E2%9C%A6-staking-dueling-%E2%9C%A6-1-8-1-12-x-supported-%E2%9C%A6-duel-players-for-staked-items-money-%E2%9C%A6.57226/
