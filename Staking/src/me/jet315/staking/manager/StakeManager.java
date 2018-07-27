@@ -74,7 +74,7 @@ public class StakeManager {
         stakePlayer2.setBetItems(InvUtils.getItemsInInventory(p2));
 
 
-        if(availableKits != 0) {
+        if (availableKits != 0) {
             //first player
 
 
@@ -130,7 +130,7 @@ public class StakeManager {
             //Turn off flight
             Essentials es = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
             //null check needed
-            if(es != null) {
+            if (es != null) {
                 es.getUser(stakePlayer.getPlayer()).getBase().setFlying(false);
                 es.getUser(stakePlayer2.getPlayer()).getBase().setFlying(false);
             }
@@ -138,7 +138,7 @@ public class StakeManager {
             stakePlayer.getOpponent().getPlayer().teleport(arena.getSpawnLocation2());
             stakePlayer.setArena(arena);
             stakePlayer2.setArena(arena);
-            loadKitsGUI(stakePlayer, stakePlayer2,arena);
+            loadKitsGUI(stakePlayer, stakePlayer2, arena);
 
         } else {
             //Tell them the issue
@@ -147,7 +147,7 @@ public class StakeManager {
 
             //refund items & money
             //refund inventory that was cleared
-            Core.getInstance().getStakingPlayerManager().forceKickPlayersFromDuel(stakePlayer,stakePlayer2);
+            Core.getInstance().getStakingPlayerManager().forceKickPlayersFromDuel(stakePlayer, stakePlayer2);
 
         }
 
@@ -156,7 +156,7 @@ public class StakeManager {
     /**
      * Shows the kits to the user
      */
-    private void loadKitsGUI(StakePlayer stakePlayer, StakePlayer stakePlayer2,Arena arena) {
+    private void loadKitsGUI(StakePlayer stakePlayer, StakePlayer stakePlayer2, Arena arena) {
         int timeToWait = Core.getInstance().getProperties().getMatchCountDownTime();
 
         if (timeToWait > 0) {
@@ -166,44 +166,48 @@ public class StakeManager {
        /*     playerOneLoc.add(0.5,0,0.5);
             playerTwoLoc.add(0.5,0,0.5);
 */
-       for(int y = 0; y <=1 ; y++) {
-           for (int x = -1; x < 2; x++) {
-               INNER:
-               for (int z = -1; z < 2; z++) {
-                   if (x == 0 && z == 0 || z == x) continue;
-                   Block playerOneBlock = playerOneLoc.getWorld().getBlockAt(new Location(playerOneLoc.getWorld(), playerOneLoc.getX() + x, playerOneLoc.getY() + y, playerOneLoc.getZ() + z));
-                   Block playerTwoBlock = playerTwoLoc.getWorld().getBlockAt(new Location(playerTwoLoc.getWorld(), playerTwoLoc.getX() + x, playerTwoLoc.getY() + y, playerTwoLoc.getZ() + z));
-                   if (playerOneBlock.getType() == Material.AIR) {
-                       playerOneBlock.setType(Material.BARRIER);
-                       arena.getBlocksChangedToBarriers().add(playerOneBlock);
-                   }
-                   if (playerTwoBlock.getType() == Material.AIR) {
-                       playerTwoBlock.setType(Material.BARRIER);
-                       arena.getBlocksChangedToBarriers().add(playerTwoBlock);
-                   }
-               }
-           }
-       }
-
+            for (int y = 0; y <= 1; y++) {
+                for (int x = -1; x < 2; x++) {
+                    INNER:
+                    for (int z = -1; z < 2; z++) {
+                        if (x == 0 && z == 0 || z == x) continue;
+                        Block playerOneBlock = playerOneLoc.getWorld().getBlockAt(new Location(playerOneLoc.getWorld(), playerOneLoc.getX() + x, playerOneLoc.getY() + y, playerOneLoc.getZ() + z));
+                        Block playerTwoBlock = playerTwoLoc.getWorld().getBlockAt(new Location(playerTwoLoc.getWorld(), playerTwoLoc.getX() + x, playerTwoLoc.getY() + y, playerTwoLoc.getZ() + z));
+                        setBlockToBarrier(playerOneBlock, arena);
+                        setBlockToBarrier(playerTwoBlock, arena);
+                    }
+                }
+            }
+            Block abovePlayer = playerOneLoc.getWorld().getBlockAt(new Location(playerOneLoc.getWorld(), playerOneLoc.getX(), playerOneLoc.getY() + 2, playerOneLoc.getZ()));
+            Block abovePlayer2 = playerOneLoc.getWorld().getBlockAt(new Location(playerOneLoc.getWorld(), playerOneLoc.getX(), playerOneLoc.getY() + 2, playerOneLoc.getZ()));
+            setBlockToBarrier(abovePlayer, arena);
+            setBlockToBarrier(abovePlayer2, arena);
         }
 
         //See if kits exist - The loading kit bit
         int availableKits = Core.getInstance().getKitManager().getAvailableKits().size();
-        if(availableKits == 1 || timeToWait <= 0){
-            if(availableKits != 0) {
+        if (availableKits == 1 || timeToWait <= 0) {
+            if (availableKits != 0) {
                 InvUtils.loadKitSave(stakePlayer.getPlayer(), generateKit());
                 InvUtils.loadKitSave(stakePlayer.getOpponent().getPlayer(), generateKit());
             }
-        }else if(availableKits > 1){
+        } else if (availableKits > 1) {
             //Therefor must be multiple kits to select from, and the time to wait must be greater than 0
             stakePlayer.getPlayer().openInventory(Core.getInstance().getKitManager().getKitInventory());
             stakePlayer.getOpponent().getPlayer().openInventory(Core.getInstance().getKitManager().getKitInventory());
         }
-        runMatchCountdown(stakePlayer,stakePlayer2,arena);
+        runMatchCountdown(stakePlayer, stakePlayer2, arena);
 
     }
 
-    private void runMatchCountdown(StakePlayer stakePlayer,StakePlayer stakePlayer2,Arena arena){
+    private void setBlockToBarrier(Block block, Arena arena) {
+        if (block.getType() == Material.AIR) {
+            block.setType(Material.BARRIER);
+            arena.getBlocksChangedToBarriers().add(block);
+        }
+    }
+
+    private void runMatchCountdown(StakePlayer stakePlayer, StakePlayer stakePlayer2, Arena arena) {
         int matchTime = Core.getInstance().getProperties().getMatchTime();
         int countDownTime = Core.getInstance().getProperties().getMatchCountDownTime();
         arena.setMatchTime(matchTime + countDownTime);
@@ -213,7 +217,7 @@ public class StakeManager {
             public void run() {
 
                 // need to check if players has died, probably set a boolean in arena
-                if(arena.isResetArena()){
+                if (arena.isResetArena()) {
                     //It's ended, so reset
                     arena.setResetArena(false);
                     arena.setArenaActive(false);
@@ -228,22 +232,22 @@ public class StakeManager {
                 }
 
                 //Check if in match countdown
-                if(arena.getMatchTime() >= matchTime){
+                if (arena.getMatchTime() >= matchTime) {
                     //Must be in match countdown
                     int matchCountDown = arena.getMatchTime() - matchTime;
                     //Check for a suitable message to show to the users
-                    if(Core.getInstance().getMessages().getTitleMatchCountDown().containsKey(matchCountDown)){
+                    if (Core.getInstance().getMessages().getTitleMatchCountDown().containsKey(matchCountDown)) {
                         Core.getInstance().getMessages().getTitleMatchCountDown().get(matchCountDown).playTitle(stakePlayer.getPlayer());
                         Core.getInstance().getMessages().getTitleMatchCountDown().get(matchCountDown).playTitle(stakePlayer.getOpponent().getPlayer());
                     }
-                    if(Core.getInstance().getMessages().getMessageMatchCountDown().containsKey(matchCountDown)){
-                        stakePlayer.getPlayer().sendMessage(Core.getInstance().getMessages().getMessageMatchCountDown().get(matchCountDown).replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()));
-                        stakePlayer.getOpponent().getPlayer().sendMessage(Core.getInstance().getMessages().getMessageMatchCountDown().get(matchCountDown).replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()));
+                    if (Core.getInstance().getMessages().getMessageMatchCountDown().containsKey(matchCountDown)) {
+                        stakePlayer.getPlayer().sendMessage(Core.getInstance().getMessages().getMessageMatchCountDown().get(matchCountDown).replaceAll("%PLUGINPREFIX%", Core.getInstance().getProperties().getPluginsPrefix()));
+                        stakePlayer.getOpponent().getPlayer().sendMessage(Core.getInstance().getMessages().getMessageMatchCountDown().get(matchCountDown).replaceAll("%PLUGINPREFIX%", Core.getInstance().getProperties().getPluginsPrefix()));
                     }
                     //Check if the match count down is over
-                    if(matchCountDown == 0) {
+                    if (matchCountDown == 0) {
                         //Heal players
-                        Utils.healPlayers(stakePlayer.getPlayer(),stakePlayer2.getPlayer());
+                        Utils.healPlayers(stakePlayer.getPlayer(), stakePlayer2.getPlayer());
                         //replace barriers to air
                         for (Block block : arena.getBlocksChangedToBarriers()) {
                             block.setType(Material.AIR);
@@ -262,7 +266,7 @@ public class StakeManager {
                             if (!stakePlayer2.isHasSelectedKit()) {
                                 stakePlayer2.setHasSelectedKit(true);
                                 stakePlayer2.getPlayer().closeInventory();
-                               InvUtils.loadKitSave(stakePlayer2.getPlayer(), generateKit());
+                                InvUtils.loadKitSave(stakePlayer2.getPlayer(), generateKit());
                             }
                         }
                     }
@@ -272,17 +276,17 @@ public class StakeManager {
 
                 //Probably do config option so its like at a certain time, end game, certain time, potion effect, etc
                 //check if matchcountdown time is up, check player has kits, etc
-                if(arena.getMatchTime() == 0){
+                if (arena.getMatchTime() == 0) {
 
                     //tell them their time is up!
-                    String messageToSend = Core.getInstance().getMessages().getMatchEndDueToTime().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix());
+                    String messageToSend = Core.getInstance().getMessages().getMatchEndDueToTime().replaceAll("%PLUGINPREFIX%", Core.getInstance().getProperties().getPluginsPrefix());
                     stakePlayer.getPlayer().sendMessage(messageToSend);
                     stakePlayer2.getPlayer().sendMessage(messageToSend);
  /*                   if(availableKits != 0) {
                         InvUtils.clearInventory(stakePlayer.getPlayer());
                         InvUtils.clearInventory(stakePlayer2.getPlayer());
                     }*/
-                    Core.getInstance().getStakingPlayerManager().forceKickPlayersFromDuel(stakePlayer,stakePlayer2);
+                    Core.getInstance().getStakingPlayerManager().forceKickPlayersFromDuel(stakePlayer, stakePlayer2);
                     //It's ended, so reset
                     arena.setResetArena(false);
                     arena.setArenaActive(false);
@@ -290,23 +294,21 @@ public class StakeManager {
                     cancel();
 
                 }
-                arena.setMatchTime(arena.getMatchTime()-1);
+                arena.setMatchTime(arena.getMatchTime() - 1);
             }
 
-        }.runTaskTimer(Core.getInstance(), 0L,20L);
+        }.runTaskTimer(Core.getInstance(), 0L, 20L);
     }
 
-    private IInterfaceKitSave generateKit(){
+    private IInterfaceKitSave generateKit() {
         int availableKits = Core.getInstance().getKitManager().getAvailableKits().size();
         List<IInterfaceKitSave> listOfKits = new ArrayList<>();
-        for(IInterfaceKitSave kit : Core.getInstance().getKitManager().getAvailableKits().values()){
+        for (IInterfaceKitSave kit : Core.getInstance().getKitManager().getAvailableKits().values()) {
             listOfKits.add(kit);
         }
 
-        return  listOfKits.get(new Random().nextInt(availableKits));
+        return listOfKits.get(new Random().nextInt(availableKits));
     }
-
-
 
 
 }
