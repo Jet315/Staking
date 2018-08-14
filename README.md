@@ -9,6 +9,7 @@ This plugin provides a way for players to stake items, or money, against other p
 - Allow players to stake items (or money using Vault) against one another
 - Configure the Kits players can select for a duel
 - Allow players to fight with their own items
+- Setup arenas with two commands
 - Disable McMMO Abilities during duels
 - Save player stats data to an SQLite database
 - Works out the box, however very configurable
