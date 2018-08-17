@@ -127,13 +127,16 @@ public class StakeManager {
             stakePlayer2.getPlayer().setGameMode(GameMode.SURVIVAL);
             stakePlayer.getPlayer().setFlying(false);
             stakePlayer2.getPlayer().setFlying(false);
+            stakePlayer2.getPlayer().setAllowFlight(false);
+            stakePlayer.getPlayer().setAllowFlight(false);
             //Turn off flight
-            Essentials es = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
+  /*          Essentials es = (Essentials) Bukkit.getPluginManager().getPlugin("Essentials");
             //null check needed
             if (es != null) {
                 es.getUser(stakePlayer.getPlayer()).getBase().setFlying(false);
                 es.getUser(stakePlayer2.getPlayer()).getBase().setFlying(false);
-            }
+                es.getUser(e.getPlayer()).getBase().setAllowFlight(false);
+            }*/
             stakePlayer.getPlayer().teleport(arena.getSpawnLocation1());
             stakePlayer.getOpponent().getPlayer().teleport(arena.getSpawnLocation2());
             stakePlayer.setArena(arena);
