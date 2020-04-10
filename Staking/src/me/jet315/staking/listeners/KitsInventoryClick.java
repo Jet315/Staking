@@ -17,7 +17,7 @@ public class KitsInventoryClick implements Listener {
     @EventHandler
     public void onClick(InventoryClickEvent e) {
         if (e.getClickedInventory() == null) return;
-        if (e.getClickedInventory().getName().equals(Core.getInstance().getKitManager().getInventoryName())) {
+        if (e.getView().getTitle().equals(Core.getInstance().getKitManager().getInventoryName())) {
             for(IInterfaceKitSave kitSelected : Core.getInstance().getKitManager().getAvailableKits().values()) {
                 if(kitSelected.isKitClicked(e.getCurrentItem())){
                     Player p = (Player) e.getWhoClicked();

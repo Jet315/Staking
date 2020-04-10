@@ -75,7 +75,7 @@ public class GUI implements DataFile {
 
         String dividerItemStack = config.getString("DividerItem");
         String dividerItemStackSplit[] = dividerItemStack.split(":");
-        if (dividerItemStackSplit.length > 0) {
+        if (dividerItemStackSplit.length > 1) {
             dividerItem = new ItemStack(Material.valueOf(dividerItemStackSplit[0]), 1, Short.valueOf(dividerItemStackSplit[1]));
         } else {
             dividerItem = new ItemStack(Material.valueOf(dividerItemStackSplit[0]));
@@ -161,7 +161,7 @@ public class GUI implements DataFile {
 
         String acceptedItemStack = config.getString("AcceptedItem");
         String acceptedItemStackSplit[] = acceptedItemStack.split(":");
-        if (acceptedItemStackSplit.length > 0) {
+        if (acceptedItemStackSplit.length > 1) {
             acceptItem = new ItemStack(Material.valueOf(acceptedItemStackSplit[0]), 1, Short.valueOf(acceptedItemStackSplit[1]));
         } else {
             acceptItem = new ItemStack(Material.valueOf(acceptedItemStackSplit[0]));
@@ -172,7 +172,7 @@ public class GUI implements DataFile {
 
         String notAcceptedItemStack = config.getString("NotAcceptedItem");
         String notAcceptedItemStackSplit[] = notAcceptedItemStack.split(":");
-        if (notAcceptedItemStackSplit.length > 0) {
+        if (notAcceptedItemStackSplit.length > 1) {
             notAcceptedItem = new ItemStack(Material.valueOf(notAcceptedItemStackSplit[0]), 1, Short.valueOf(notAcceptedItemStackSplit[1]));
         } else {
             notAcceptedItem = new ItemStack(Material.valueOf(notAcceptedItemStackSplit[0]));

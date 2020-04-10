@@ -70,6 +70,7 @@ public class Core extends JavaPlugin {
         long startTime = System.currentTimeMillis();
         System.out.println("\n[Staking] Initializing Plugin");
 
+
         instance = this;
         properties = new Properties(this);
         messages = new Messages(this);
@@ -129,7 +130,7 @@ public class Core extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new StakeInventoryClose(), this);
         Bukkit.getPluginManager().registerEvents(new StakeKitInventoryClose(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDeath(), this);
-        Bukkit.getPluginManager().registerEvents(new McMMOListeners(), this);
+        //Bukkit.getPluginManager().registerEvents(new McMMOListeners(), this);
         Bukkit.getPluginManager().registerEvents(new DuelQuit(), this);
         Bukkit.getPluginManager().registerEvents(new StatsListeners(), this);
         Bukkit.getPluginManager().registerEvents(new StakeCommandListener(), this);

@@ -11,12 +11,14 @@ public class PlayerInventorySave implements IInterfacePlayerSave{
     private ItemStack bodySlot;
     private ItemStack legsSlot;
     private ItemStack feetSlot;
+    private ItemStack shieldSlot;
 
     private Location lastLocation;
     private ArrayList<ItemStack> inventoryItems = new ArrayList<>();
 
 
-    public PlayerInventorySave(ItemStack headSlot, ItemStack bodySlot, ItemStack legsSlot, ItemStack feetSlot, ArrayList<ItemStack> inventoryItems,Location location) {
+    public PlayerInventorySave(ItemStack shieldSlot, ItemStack headSlot, ItemStack bodySlot, ItemStack legsSlot, ItemStack feetSlot, ArrayList<ItemStack> inventoryItems,Location location) {
+        this.shieldSlot = shieldSlot;
         this.headSlot = headSlot;
         this.bodySlot = bodySlot;
         this.legsSlot = legsSlot;
@@ -51,6 +53,9 @@ public class PlayerInventorySave implements IInterfacePlayerSave{
         return inventoryItems;
     }
 
+    public ItemStack getShieldSlot() {
+        return shieldSlot;
+    }
 }
 
 

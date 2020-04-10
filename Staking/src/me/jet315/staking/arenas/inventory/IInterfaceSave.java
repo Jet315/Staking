@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public interface IInterfaceSave {
 
+    public ItemStack getShieldSlot();
     public ItemStack getHeadSlot();
     public ItemStack getBodySlot();
     public ItemStack getLegsSlot();

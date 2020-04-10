@@ -26,6 +26,11 @@ public class KitInventorySave implements IInterfaceKitSave{
 
 
     @Override
+    public ItemStack getShieldSlot() {
+        return null;
+    }
+
+    @Override
     public ItemStack getHeadSlot() {
         return headSlot;
     }

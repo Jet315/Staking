@@ -53,7 +53,7 @@ public class CommandHandler implements org.bukkit.command.CommandExecutor {
                     if(command == null) command = commands.get("*");
 
                     if (command.getPermission() != null && !sender.hasPermission(command.getPermission())) {
-                        sender.sendMessage(Core.getInstance().getProperties().getPluginsPrefix() + Core.getInstance().getMessages().getNoPermission());
+                        sender.sendMessage(Core.getInstance().getProperties().getPluginsPrefix() + Core.getInstance().getMessages().getNoPermission().replaceAll("%PLUGINPREFIX%",Core.getInstance().getProperties().getPluginsPrefix()));
                         return true;
 
                     }

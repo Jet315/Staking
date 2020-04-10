@@ -29,7 +29,7 @@ public class StakeInventoryClick implements Listener {
     public void onClick(InventoryClickEvent e) {
         if (e.getClickedInventory() == null) return;
 
-        if (e.getClickedInventory().getName().equals(Core.getInstance().getGui().getStakeInventoryName())) {
+        if (e.getView().getTitle().equals(Core.getInstance().getGui().getStakeInventoryName())) {
             Player p = (Player) e.getWhoClicked();
             StakePlayer playerWhoClicked = Core.getInstance().getStakingPlayerManager().getStakePlayer(((Player) e.getWhoClicked()));
 
@@ -174,9 +174,9 @@ public class StakeInventoryClick implements Listener {
 */
         }
         //Disables shift clicking to the Stake Inventory inventory
-        if(e.getInventory().getName().equals(Core.getInstance().getGui().getStakeInventoryName())){
+        if(e.getView().getTitle().equals(Core.getInstance().getGui().getStakeInventoryName())){
             if(e.getClick().isShiftClick()){
-                if(!(e.getClickedInventory().getName().equals(Core.getInstance().getGui().getStakeInventoryName()))){
+                if(!(e.getView().getTitle().equals(Core.getInstance().getGui().getStakeInventoryName()))){
                     e.setCancelled(true);
                 }
             }

@@ -15,7 +15,7 @@ public class StakeKitInventoryClose implements Listener {
     @EventHandler
     public void onKitInventoryClose(InventoryCloseEvent e) {
 
-        if (e.getInventory().getName().equals(Core.getInstance().getKitManager().getInventoryName())) {
+        if (e.getView().getTitle().equals(Core.getInstance().getKitManager().getInventoryName())) {
             //closed kit
             //Get stake player
             StakePlayer stakePlayer = Core.getInstance().getStakingPlayerManager().getStakePlayer((Player) e.getPlayer());

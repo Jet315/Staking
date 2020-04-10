@@ -77,7 +77,7 @@ public class InvUtils {
     public static ArrayList<ItemStack> getItemsInInventory(Player p){
         ArrayList<ItemStack> itemsBetted = new ArrayList<>();
         Inventory inventory = p.getOpenInventory().getTopInventory();
-        if(inventory != null && inventory.getName().equals(Core.getInstance().getGui().getStakeInventoryName())){
+        if(inventory != null && inventory.getTitle().equals(Core.getInstance().getGui().getStakeInventoryName())){
         for(int i = 0; i < inventory.getSize() ; i++){
             if(InvUtils.validLeftSlots.contains(i)) {
                 if (inventory.getItem(i) != null && inventory.getItem(i).getType() != Material.AIR) {
@@ -145,6 +145,11 @@ public class InvUtils {
      * @param p
      */
     public static void loadPlayerSave(Player p, IInterfaceSave playerSave){
+
+        //shield slot
+        if(playerSave.getShieldSlot() != null && playerSave.getShieldSlot().getType() != Material.AIR){
+            p.getInventory().setItemInOffHand(playerSave.getShieldSlot());
+        }
         //adds items to body slots
         if(playerSave.getHeadSlot() != null && playerSave.getHeadSlot().getType() != Material.AIR){
             p.getInventory().setHelmet(playerSave.getHeadSlot());

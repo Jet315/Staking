@@ -16,7 +16,7 @@ public class StakingInventoryDrag implements Listener {
 
     @EventHandler
     public void onDrag(InventoryDragEvent e) {
-        if (e.getInventory().getName().equals(Core.getInstance().getGui().getStakeInventoryName())) {
+        if (e.getView().getTitle().equals(Core.getInstance().getGui().getStakeInventoryName())) {
             Player p = (Player) e.getWhoClicked();
             StakePlayer playerWhoClicked = Core.getInstance().getStakingPlayerManager().getStakePlayer(p);
 

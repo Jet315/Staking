@@ -84,7 +84,7 @@ public class StakeManager {
 
             ArrayList<ItemStack> playersItems = InvUtils.getPlayersInventoryItems(p);
 
-            IInterfacePlayerSave player1Save = new PlayerInventorySave(p.getInventory().getHelmet() == null ? new ItemStack(Material.AIR) : p.getInventory().getHelmet().clone(),
+            IInterfacePlayerSave player1Save = new PlayerInventorySave(p.getInventory().getItemInOffHand() == null ? new ItemStack(Material.AIR) : p.getInventory().getItemInOffHand(), p.getInventory().getHelmet() == null ? new ItemStack(Material.AIR) : p.getInventory().getHelmet().clone(),
                     p.getInventory().getChestplate() == null ? new ItemStack(Material.AIR) : p.getInventory().getChestplate().clone(),
                     p.getInventory().getLeggings() == null ? new ItemStack(Material.AIR) : p.getInventory().getLeggings().clone(),
                     p.getInventory().getBoots() == null ? new ItemStack(Material.AIR) : p.getInventory().getBoots().clone(),
@@ -95,7 +95,7 @@ public class StakeManager {
             p2.closeInventory();
             InvUtils.clearItemInOffHand(p2);
             ArrayList<ItemStack> playersItems2 = InvUtils.getPlayersInventoryItems(p2);
-            IInterfacePlayerSave player2Save = new PlayerInventorySave(p2.getInventory().getHelmet() == null ? new ItemStack(Material.AIR) : p2.getInventory().getHelmet().clone(),
+            IInterfacePlayerSave player2Save = new PlayerInventorySave(p2.getInventory().getItemInOffHand() == null ? new ItemStack(Material.AIR) : p2.getInventory().getItemInOffHand(),p2.getInventory().getHelmet() == null ? new ItemStack(Material.AIR) : p2.getInventory().getHelmet().clone(),
                     p2.getInventory().getChestplate() == null ? new ItemStack(Material.AIR) : p2.getInventory().getChestplate().clone(),
                     p2.getInventory().getLeggings() == null ? new ItemStack(Material.AIR) : p2.getInventory().getLeggings().clone(),
                     p2.getInventory().getBoots() == null ? new ItemStack(Material.AIR) : p2.getInventory().getBoots().clone(),
